@@ -36,7 +36,11 @@ jobs:
       - name: Install composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
       # Before running tests, ensure Redis is up and can be connected to
+      # Install redis-tools to get redis-cli
+      - name: Install Redis Tools
+        run: sudo apt-get update && sudo apt-get install redis-tools
+      # Before running tests, ensure Redis is up and can be connected to
       - name: Check Redis connection
-        run: redis-cli ping
+        run: redis-cli -h localhost -p 6379 ping
       - name: Run tests
         run: XDEBUG_MODE=coverage php vendor/bin/phpunit -c phpunit.xml --coverage-clover clover.xml
