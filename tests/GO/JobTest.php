@@ -2,13 +2,14 @@
 
 namespace GO\Job\Tests;
 
+use Redis;
 use GO\Job;
 use PHPUnit\Framework\TestCase;
 
 class JobTest extends TestCase
 {
     /**
-     * @var \Redis
+     * @var Redis
      */
     protected $redis;
 
@@ -17,7 +18,7 @@ class JobTest extends TestCase
         parent::setUp();
 
         $this->redis = new Redis();
-        $this->redis->connect('127.0.0.1', 6379);
+        $this->redis->connect('localhost', 6379);
         // $this->redis->select(15); // Use a separate database for testing if needed
     }
 
